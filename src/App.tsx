@@ -84,6 +84,7 @@ export default function Calendar() {
       <FullCalendar
         plugins={[dayGridPlugin]}
         initialView="dayGridMonth"
+        timeZone="America/Denver"
         eventDidMount={(info) => {
           info.el.style.cursor = "pointer";
         }}
