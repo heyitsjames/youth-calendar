@@ -25,7 +25,7 @@ type TooltipState = {
 
 const deaconsEvents = [
   { title: "China Night", start: "2026-04-14" },
-  { title: "Bowling", start: "2026-04-28" },
+  { title: "Family History Center", start: "2026-04-28" },
   { title: "Service Project", start: "2026-05-12" },
   { title: "Meat Fest", start: "2026-06-12" },
   { title: "Devotional with Q&A", start: "2026-06-23" },
@@ -33,7 +33,7 @@ const deaconsEvents = [
 
 const teachersEvents = [
   { title: "China Night", start: "2026-04-14" },
-  { title: "Family History", start: "2026-04-28" },
+  { title: "Family History Center", start: "2026-04-28" },
   { title: "Hike to the Star", start: "2026-05-12" },
   { title: "Meat Fest", start: "2026-06-12" },
   { title: "Devotional with Q&A", start: "2026-06-23" },
@@ -41,7 +41,7 @@ const teachersEvents = [
 
 const priestsEvents = [
   { title: "Missionary Training (in Montpelier)", start: "2026-04-15" },
-  { title: "Service: Yard Work", start: "2026-04-28" },
+  { title: "Family History Center", start: "2026-04-28" },
   { title: "Board Games", start: "2026-05-12" },
   { title: "Hiking", start: "2026-06-09" },
   { title: "Golf", start: "2026-06-23" },
