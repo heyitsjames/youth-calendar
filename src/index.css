@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+@layer base {
+  html,
+  body,
+  #root {
+    min-height: 100dvh;
+  }
+}
+
+@layer components {
+  @media (max-width: 639px) {
+    .youth-calendar .fc-view-harness {
+      min-height: calc(100dvh - 7rem);
+    }
+
+    .youth-calendar .fc-daygrid-day-frame {
+      min-height: calc((100dvh - 7rem) / 6);
+    }
+  }
+}

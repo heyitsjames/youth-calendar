@@ -81,64 +81,73 @@ export default function Calendar() {
 
   return (
     <>
-      <FullCalendar
-        plugins={[dayGridPlugin]}
-        initialView="dayGridMonth"
-        timeZone="America/Denver"
-        eventDidMount={(info) => {
-          info.el.style.cursor = "pointer";
-        }}
-        eventClick={(info) => {
-          info.jsEvent.preventDefault();
+      <div className="youth-calendar">
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          timeZone="America/Denver"
+          fixedWeekCount={false}
+          showNonCurrentDates={false}
+          headerToolbar={{
+            left: "prev",
+            center: "title",
+            right: "next",
+          }}
+          eventDidMount={(info) => {
+            info.el.style.cursor = "pointer";
+          }}
+          eventClick={(info) => {
+            info.jsEvent.preventDefault();
 
-          const rect = info.el.getBoundingClientRect();
-          const tooltipWidth = 260;
-          const horizontalPadding = 12;
-          const maxX = window.innerWidth - tooltipWidth - horizontalPadding;
-          const desiredX = rect.left + rect.width / 2 - tooltipWidth / 2;
-          const x = Math.max(horizontalPadding, Math.min(desiredX, maxX));
+            const rect = info.el.getBoundingClientRect();
+            const tooltipWidth = 260;
+            const horizontalPadding = 12;
+            const maxX = window.innerWidth - tooltipWidth - horizontalPadding;
+            const desiredX = rect.left + rect.width / 2 - tooltipWidth / 2;
+            const x = Math.max(horizontalPadding, Math.min(desiredX, maxX));
 
-          const y = Math.max(8, rect.top - 12);
+            const y = Math.max(8, rect.top - 12);
 
-          setTooltip({
-            text: getEventDetails(info.event),
-            x,
-            y,
-          });
-        }}
-        eventSources={[
-          {
-            id: "deacons",
-            events: deaconsEvents,
-            color: "#16a34a",
-            textColor: "#ffffff",
-          },
-          {
-            id: "teachers",
-            events: teachersEvents,
-            color: "#dc2626",
-            textColor: "#ffffff",
-          },
-          {
-            id: "priests",
-            events: priestsEvents,
-            color: "#2563eb",
-            textColor: "#ffffff",
-          },
-          {
-            id: "combinedYoungMenEvents",
-            events: combinedYoungMenEvents,
-            color: "#e8c243",
-            textColor: "#ffffff",
-          },
-          {
-            id: "combinedAllYouthEvents",
-            events: combinedAllYouthEvents,
-            color: "#4703ad",
-            textColor: "#ffffff",
-          },
-        ]}
-      />
+            setTooltip({
+              text: getEventDetails(info.event),
+              x,
+              y,
+            });
+          }}
+          eventSources={[
+            {
+              id: "deacons",
+              events: deaconsEvents,
+              color: "#16a34a",
+              textColor: "#ffffff",
+            },
+            {
+              id: "teachers",
+              events: teachersEvents,
+              color: "#dc2626",
+              textColor: "#ffffff",
+            },
+            {
+              id: "priests",
+              events: priestsEvents,
+              color: "#2563eb",
+              textColor: "#ffffff",
+            },
+            {
+              id: "combinedYoungMenEvents",
+              events: combinedYoungMenEvents,
+              color: "#e8c243",
+              textColor: "#ffffff",
+            },
+            {
+              id: "combinedAllYouthEvents",
+              events: combinedAllYouthEvents,
+              color: "#4703ad",
+              textColor: "#ffffff",
+            },
+          ]}
+        />
+      </div>
       {tooltip ? (
         <div
           data-role="event-tooltip"
