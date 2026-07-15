@@ -29,6 +29,9 @@ const deaconsEvents = [
   { title: "Service Project", start: "2026-05-12" },
   { title: "Meat Fest", start: "2026-06-12" },
   { title: "Devotional with Q&A", start: "2026-06-23" },
+  { title: "Halo Ball", start: "2026-08-11" },
+  { title: "Hike to the Star Devotional", start: "2026-09-08" },
+  { title: "Learn to Drive Stick", start: "2026-09-22" },
 ];
 
 const teachersEvents = [
@@ -37,6 +40,9 @@ const teachersEvents = [
   { title: "Hike to the Star", start: "2026-05-12" },
   { title: "Meat Fest", start: "2026-06-12" },
   { title: "Devotional with Q&A", start: "2026-06-23" },
+  { title: "Halo Ball", start: "2026-08-11" },
+  { title: "Hike to the Star Devotional", start: "2026-09-08" },
+  { title: "Learn to Drive Stick", start: "2026-09-22" },
 ];
 
 const priestsEvents = [
@@ -45,18 +51,30 @@ const priestsEvents = [
   { title: "Board Games", start: "2026-05-12" },
   { title: "Hiking", start: "2026-06-09" },
   { title: "Golf", start: "2026-06-23" },
+  { title: "Driving Range", start: "2026-08-11" },
+  { title: "Knives with Dee Hink", start: "2026-09-08" },
+  { title: "Board Games", start: "2026-09-22" },
 ];
 
 const combinedYoungMenEvents = [
   { title: "Paintball", start: "2026-05-05" },
   { title: "Bridge Jumping", start: "2026-06-30" },
   { title: "Fishing", start: "2026-05-26" },
+  { title: "Bridge Jumping", start: "2026-07-28" },
+  { title: "Fair Week (No Activities)", start: "2026-08-04" },
+  { title: "Ultimate Frisbee", start: "2026-08-25" },
+  { title: "Meat Fest", start: "2026-09-01" },
+  { title: "Service Project: Cleanup (City Cleanup)", start: "2026-09-29" },
 ];
+
 const combinedAllYouthEvents = [
   { title: "Human Battleship", start: "2026-04-21" },
   { title: "TBA (YW In Charge)", start: "2026-05-19" },
   { title: "Temple Trip", start: "2026-06-02" },
   { title: "Ultimate Frisbee", start: "2026-06-16" },
+  { title: "Kiddie Pool Kick Ball", start: "2026-07-21" },
+  { title: "TBA (YW In Charge)", start: "2026-08-18" },
+  { title: "TBA (YM In Charge)", start: "2026-09-15" },
 ];
 
 export default function Calendar() {
