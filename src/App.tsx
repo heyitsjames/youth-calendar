@@ -63,7 +63,7 @@ const combinedYoungMenEvents = [
   { title: "Bridge Jumping", start: "2026-07-28" },
   { title: "Fair Week (No Activities)", start: "2026-08-04" },
   { title: "Ultimate Frisbee", start: "2026-08-25" },
-  { title: "Meat Fest", start: "2026-09-01" },
+  { title: "Temple Trip (Meet at 5:45pm)", start: "2026-09-01" },
   { title: "Service Project: Cleanup (City Cleanup)", start: "2026-09-29" },
 ];
 
@@ -74,7 +74,7 @@ const combinedAllYouthEvents = [
   { title: "Ultimate Frisbee", start: "2026-06-16" },
   { title: "Kiddie Pool Kick Ball", start: "2026-07-21" },
   { title: "TBA (YW In Charge)", start: "2026-08-18" },
-  { title: "TBA (YM In Charge)", start: "2026-09-15" },
+  { title: "Montpelier Temple Open House", start: "2026-09-15" },
 ];
 
 export default function Calendar() {
