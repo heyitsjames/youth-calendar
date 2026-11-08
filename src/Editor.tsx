@@ -98,7 +98,7 @@ function EventsForm({ password }: { password: string }) {
   const [dirty, setDirty] = useState(false);
   const [status, setStatus] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
   const [saving, setSaving] = useState(false);
-  const [showPast, setShowPast] = useState(false);
+  const [showPast, setShowPast] = useState(true);
 
   useEffect(() => {
     fetchEvents().then(
