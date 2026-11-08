@@ -107,7 +107,10 @@ function validateEvents(body: unknown): CalendarEvent[] | string {
     if (!Array.isArray(groups) || groups.some((g) => typeof g !== "string" || !GROUPS.includes(g)))
       return `Event ${i + 1} has an unknown group`;
     // Dedupe and keep a stable group order.
-    const cleanGroups = GROUPS.filter((g) => groups.includes(g));
+    let cleanGroups = GROUPS.filter((g) => groups.includes(g));
+    // Combined YM already covers the three quorums.
+    if (cleanGroups.includes("combinedYoungMen"))
+      cleanGroups = cleanGroups.filter((g) => !["deacons", "teachers", "priests"].includes(g));
     if (cleanGroups.length === 0) return `Event ${i + 1} ("${title.trim()}") needs at least one group`;
     out.push({ title: title.trim(), start, groups: cleanGroups });
   }

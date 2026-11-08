@@ -12,6 +12,8 @@ import {
 
 type Row = CalendarEvent & { key: number };
 
+const YM_QUORUMS: GroupId[] = ["deacons", "teachers", "priests"];
+
 let nextKey = 1;
 const toRows = (events: CalendarEvent[]): Row[] => events.map((e) => ({ ...e, key: nextKey++ }));
 
@@ -126,10 +128,18 @@ function EventsForm({ password }: { password: string }) {
     setStatus(null);
   };
 
-  const toggleGroup = (row: Row, group: GroupId) =>
-    update(row.key, {
-      groups: row.groups.includes(group) ? row.groups.filter((g) => g !== group) : [...row.groups, group],
-    });
+  const toggleGroup = (row: Row, group: GroupId) => {
+    if (row.groups.includes(group)) {
+      update(row.key, { groups: row.groups.filter((g) => g !== group) });
+      return;
+    }
+    // Combined YM already means deacons, teachers and priests, so the two
+    // choices replace each other rather than stacking.
+    let groups = [...row.groups, group];
+    if (group === "combinedYoungMen") groups = groups.filter((g) => !YM_QUORUMS.includes(g));
+    else if (YM_QUORUMS.includes(group)) groups = groups.filter((g) => g !== "combinedYoungMen");
+    update(row.key, { groups });
+  };
 
   const addRow = () => {
     setRows((prev) => [{ key: nextKey++, title: "", start: "", groups: [] }, ...prev!]);
