@@ -15,7 +15,11 @@ type Row = CalendarEvent & { key: number };
 const YM_QUORUMS: GroupId[] = ["deacons", "teachers", "priests"];
 
 let nextKey = 1;
-const toRows = (events: CalendarEvent[]): Row[] => events.map((e) => ({ ...e, key: nextKey++ }));
+// Latest first. Sorted only on load/save so rows don't jump while editing.
+const toRows = (events: CalendarEvent[]): Row[] =>
+  [...events]
+    .sort((a, b) => b.start.localeCompare(a.start) || a.title.localeCompare(b.title))
+    .map((e) => ({ ...e, key: nextKey++ }));
 
 export default function Editor() {
   const [password, setPassword] = useState(getStoredPassword);
