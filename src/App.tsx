@@ -1,19 +1,13 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { useEffect, useState } from "react";
-import type { EventApi } from "@fullcalendar/core";
-
-const sourceLabels: Record<string, string> = {
-  deacons: "Deacons",
-  teachers: "Teachers",
-  priests: "Priests",
-  combinedYoungMenEvents: "Combined Young Men",
-  combinedAllYouthEvents: "Combined All Youth",
-};
+import type { EventApi, EventSourceInput } from "@fullcalendar/core";
+import Editor from "./Editor";
+import { GROUPS, fetchEvents, getStoredPassword, login, setStoredPassword, type CalendarEvent } from "./events";
 
 function getEventDetails(event: EventApi) {
   const sourceId = event.source?.id ?? "unknown";
-  const sourceLabel = sourceLabels[sourceId] ?? sourceId;
+  const sourceLabel = GROUPS.find((g) => g.id === sourceId)?.label ?? sourceId;
   return `${sourceLabel}: ${event.title}`;
 }
 
@@ -23,62 +17,35 @@ type TooltipState = {
   y: number;
 } | null;
 
-const deaconsEvents = [
-  { title: "China Night", start: "2026-04-14" },
-  { title: "Family History Center", start: "2026-04-28" },
-  { title: "Service Project", start: "2026-05-12" },
-  { title: "Meat Fest", start: "2026-06-12" },
-  { title: "Devotional with Q&A", start: "2026-06-23" },
-  { title: "Halo Ball", start: "2026-08-11" },
-  { title: "Hike to the Star Devotional", start: "2026-09-08" },
-  { title: "Learn to Drive Stick", start: "2026-09-22" },
-];
+const isEditPage = /\/edit\/?$/.test(window.location.pathname);
 
-const teachersEvents = [
-  { title: "China Night", start: "2026-04-14" },
-  { title: "Family History Center", start: "2026-04-28" },
-  { title: "Hike to the Star", start: "2026-05-12" },
-  { title: "Meat Fest", start: "2026-06-12" },
-  { title: "Devotional with Q&A", start: "2026-06-23" },
-  { title: "Halo Ball", start: "2026-08-11" },
-  { title: "Hike to the Star Devotional", start: "2026-09-08" },
-  { title: "Learn to Drive Stick", start: "2026-09-22" },
-];
+export default function App() {
+  return isEditPage ? <Editor /> : <Calendar />;
+}
 
-const priestsEvents = [
-  { title: "Missionary Training (in Montpelier)", start: "2026-04-15" },
-  { title: "Family History Center", start: "2026-04-28" },
-  { title: "Board Games", start: "2026-05-12" },
-  { title: "Hiking", start: "2026-06-09" },
-  { title: "Golf", start: "2026-06-23" },
-  { title: "Driving Range", start: "2026-08-11" },
-  { title: "Knives with Dee Hink", start: "2026-09-08" },
-  { title: "Board Games", start: "2026-09-22" },
-];
-
-const combinedYoungMenEvents = [
-  { title: "Paintball", start: "2026-05-05" },
-  { title: "Bridge Jumping", start: "2026-06-30" },
-  { title: "Fishing", start: "2026-05-26" },
-  { title: "Bridge Jumping", start: "2026-07-28" },
-  { title: "Fair Week (No Activities)", start: "2026-08-04" },
-  { title: "Ultimate Frisbee", start: "2026-08-25" },
-  { title: "Temple Trip (Meet at 5:45pm)", start: "2026-09-01" },
-  { title: "Service Project: Cleanup (City Cleanup)", start: "2026-09-29" },
-];
-
-const combinedAllYouthEvents = [
-  { title: "Human Battleship", start: "2026-04-21" },
-  { title: "TBA (YW In Charge)", start: "2026-05-19" },
-  { title: "Temple Trip", start: "2026-06-02" },
-  { title: "Ultimate Frisbee", start: "2026-06-16" },
-  { title: "Kiddie Pool Kick Ball", start: "2026-07-21" },
-  { title: "TBA (YW In Charge)", start: "2026-08-18" },
-  { title: "Montpelier Temple Open House", start: "2026-09-15" },
-];
-
-export default function Calendar() {
+function Calendar() {
   const [tooltip, setTooltip] = useState<TooltipState>(null);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [loadError, setLoadError] = useState(false);
+
+  const [canEdit, setCanEdit] = useState(false);
+
+  useEffect(() => {
+    fetchEvents().then(setEvents, () => setLoadError(true));
+  }, []);
+
+  // Show the Edit button only to someone who has signed in on this browser
+  // and whose password is still valid.
+  useEffect(() => {
+    const password = getStoredPassword();
+    if (!password) return;
+    login(password).then(
+      () => setCanEdit(true),
+      (err: Error) => {
+        if (err.message === "Wrong password") setStoredPassword(null);
+      },
+    );
+  }, []);
 
   useEffect(() => {
     const onDocumentClick = (event: MouseEvent) => {
@@ -97,8 +64,30 @@ export default function Calendar() {
     };
   }, []);
 
+  const eventSources: EventSourceInput[] = GROUPS.map((g) => ({
+    id: g.id,
+    events: events
+      .filter((e) => e.groups.includes(g.id))
+      .map((e) => ({ title: e.title, start: e.start })),
+    color: g.color,
+    textColor: "#ffffff",
+  }));
+
   return (
     <>
+      {loadError ? (
+        <p className="mb-2 text-center text-sm text-red-600">Couldn't load events. Try refreshing.</p>
+      ) : null}
+      {canEdit ? (
+        <div className="mb-2 flex justify-end">
+          <a
+            href={`${import.meta.env.BASE_URL}edit/`}
+            className="rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-700"
+          >
+            Edit events
+          </a>
+        </div>
+      ) : null}
       <div className="youth-calendar">
         <FullCalendar
           plugins={[dayGridPlugin]}
@@ -132,38 +121,7 @@ export default function Calendar() {
               y,
             });
           }}
-          eventSources={[
-            {
-              id: "deacons",
-              events: deaconsEvents,
-              color: "#16a34a",
-              textColor: "#ffffff",
-            },
-            {
-              id: "teachers",
-              events: teachersEvents,
-              color: "#dc2626",
-              textColor: "#ffffff",
-            },
-            {
-              id: "priests",
-              events: priestsEvents,
-              color: "#2563eb",
-              textColor: "#ffffff",
-            },
-            {
-              id: "combinedYoungMenEvents",
-              events: combinedYoungMenEvents,
-              color: "#e8c243",
-              textColor: "#ffffff",
-            },
-            {
-              id: "combinedAllYouthEvents",
-              events: combinedAllYouthEvents,
-              color: "#4703ad",
-              textColor: "#ffffff",
-            },
-          ]}
+          eventSources={eventSources}
         />
       </div>
       {tooltip ? (

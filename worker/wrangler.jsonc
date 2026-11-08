@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "youth-calendar-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "observability": { "enabled": true },
+  "vars": {
+    "GITHUB_REPO": "heyitsjames/youth-calendar",
+    "GITHUB_BRANCH": "master",
+    "EVENTS_PATH": "public/events.json",
+    "ALLOWED_ORIGINS": "https://heyitsjames.github.io,http://localhost:5173,http://localhost:4173"
+  }
+  // Secrets (not in this file): EDIT_PASSWORD, GITHUB_TOKEN
+}
