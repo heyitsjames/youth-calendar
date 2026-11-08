@@ -215,5 +215,12 @@
     "groups": [
       "combinedYoungMen"
     ]
+  },
+  {
+    "title": "Temple Night",
+    "start": "2026-11-11",
+    "groups": [
+      "combinedAllYouth"
+    ]
   }
 ]
