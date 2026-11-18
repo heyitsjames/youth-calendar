@@ -224,10 +224,102 @@
     ]
   },
   {
+    "title": "No Activity - Thanksgiving",
+    "start": "2026-11-24",
+    "groups": [
+      "combinedYoungMen"
+    ]
+  },
+  {
+    "title": "White Elephant",
+    "start": "2026-12-01",
+    "groups": [
+      "combinedAllYouth"
+    ]
+  },
+  {
+    "title": "Meatfest",
+    "start": "2026-12-08",
+    "groups": [
+      "combinedYoungMen"
+    ]
+  },
+  {
     "title": "Ward Party",
     "start": "2026-12-15",
     "groups": [
       "combinedAllYouth"
+    ]
+  },
+  {
+    "title": "Caroling",
+    "start": "2026-12-22",
+    "groups": [
+      "combinedAllYouth"
+    ]
+  },
+  {
+    "title": "Priesthood Prep",
+    "start": "2026-12-29",
+    "groups": [
+      "combinedYoungMen"
+    ]
+  },
+  {
+    "title": "Building Fishing Poles",
+    "start": "2027-01-05",
+    "groups": [
+      "combinedYoungMen"
+    ]
+  },
+  {
+    "title": "Bishop Challis Devotional",
+    "start": "2027-01-12",
+    "groups": [
+      "deacons",
+      "teachers"
+    ]
+  },
+  {
+    "title": "Service",
+    "start": "2027-01-12",
+    "groups": [
+      "priests"
+    ]
+  },
+  {
+    "title": "Black Light Volleyball",
+    "start": "2027-01-19",
+    "groups": [
+      "combinedAllYouth"
+    ]
+  },
+  {
+    "title": "Nerf War",
+    "start": "2027-01-26",
+    "groups": [
+      "combinedYoungMen"
+    ]
+  },
+  {
+    "title": "CPR/Eye Doctor",
+    "start": "2027-02-02",
+    "groups": [
+      "deacons"
+    ]
+  },
+  {
+    "title": "Meal Prep",
+    "start": "2027-02-02",
+    "groups": [
+      "priests"
+    ]
+  },
+  {
+    "title": "Building Fishing Poles",
+    "start": "2027-02-09",
+    "groups": [
+      "combinedYoungMen"
     ]
   }
 ]
