@@ -323,17 +323,17 @@
     ]
   },
   {
+    "title": "Physical Fitness Test",
+    "start": "2027-02-02",
+    "groups": [
+      "teachers"
+    ]
+  },
+  {
     "title": "Building Fishing Poles",
     "start": "2027-02-09",
     "groups": [
       "combinedYoungMen"
-    ]
-  },
-  {
-    "title": "Physical Fitness Test",
-    "start": "2027-02-09",
-    "groups": [
-      "teachers"
     ]
   }
 ]
