@@ -328,5 +328,12 @@
     "groups": [
       "combinedYoungMen"
     ]
+  },
+  {
+    "title": "Physical Fitness Test",
+    "start": "2027-02-09",
+    "groups": [
+      "teachers"
+    ]
   }
 ]
